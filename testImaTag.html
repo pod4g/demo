@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试img标签的尺寸计算规则</title>
+</head>
+<body>
+    <p>测试img标签的尺寸计算规则</p>
+    <ol>
+        <li>什么尺寸也不指定</li>
+        <li>指定width属性</li>
+        <li>指定height属性</li>
+        <li>指定width和height属性</li>
+        <li>指定width属性和style.width</li>
+        <li>指定height属性和style.height</li>
+        <li>指定width属性和style.height</li>
+        <li>指定height属性和style.width</li>
+        <li>指定width和height属性style.width和style.height</li>
+        <li>指定style.width</li>
+        <li>指定style.height</li>
+        <li>指定style.width和style.height</li>
+    </ol>
+    <h1>
+        naturalWidth:640px;
+        <br>naturalHeight:416px;</h1>
+    <h2>1. 什么尺寸也不指定</h2>
+    <p>
+        width:640px;
+        <br>height:416px;</p>
+    <img src="http://a.diaox2.com/cms/sites/default/files/20160923/zk/6401.jpg">
+    <h2>2. 指定width属性，值为320</h2>
+    <p>
+        width:320px;
+        <br>height:208px;</p>
+    <img src="http://a.diaox2.com/cms/sites/default/files/20160923/zk/6401.jpg" width="320">
+    <h2>3. 指定height属性，值为208</h2>
+    <p>
+        width:320px;
+        <br>height:208px;</p>
+    <img src="http://a.diaox2.com/cms/sites/default/files/20160923/zk/6401.jpg" height="208">
+    <h2>4. 指定width和height属性，值为300和100</h2>
+    <p>
+        width:300px;
+        <br>height:100px;</p>
+    <img src="http://a.diaox2.com/cms/sites/default/files/20160923/zk/6401.jpg" width="300" height="100">
+
+    <h2>5. 指定width和style.width属性，值为180和320</h2>
+    <p>
+        width:320px;
+        <br>height:208px;</p>
+    <img src="http://a.diaox2.com/cms/sites/default/files/20160923/zk/6401.jpg" width="180" style="width:320px;">
+
+    <h2>6. 指定height和style.height属性，值为104和208</h2>
+    <p>
+        width:320px;
+        <br>height:208px;</p>
+    <img src="http://a.diaox2.com/cms/sites/default/files/20160923/zk/6401.jpg" height="104" style="height:208px;">
+
+    <h2>7. 指定width属性和style.height，值为100和200</h2>
+    <p>
+        width:100px;
+        <br>height:200px;</p>
+    <img src="http://a.diaox2.com/cms/sites/default/files/20160923/zk/6401.jpg" width="100" style="height:200px;">
+
+    <h2>8. 指定height属性和style.width，值为100和200</h2>
+    <p>
+        width:200px;
+        <br>height:100px;</p>
+    <img src="http://a.diaox2.com/cms/sites/default/files/20160923/zk/6401.jpg" height="100" style="width:200px;">
+
+    <h2>
+        9. 指定width和height属性style.width和style.height值分别是160、104、320、208
+    </h2>
+    <p>
+        width:320px;
+        <br>height:208px;</p>
+    <img src="http://a.diaox2.com/cms/sites/default/files/20160923/zk/6401.jpg" width="160" height="104" style="width:320px;height:208px;">
+
+    <h2>10. 指定style.width，值是320</h2>
+    <p>
+        width:320px;
+        <br>height:208px;</p>
+    <img src="http://a.diaox2.com/cms/sites/default/files/20160923/zk/6401.jpg" style="width:320px;">
+
+    <h2>11. 指定style.height，值是208</h2>
+    <p>
+        width:320px;
+        <br>height:208px;</p>
+    <img src="http://a.diaox2.com/cms/sites/default/files/20160923/zk/6401.jpg" style="width:208px;">
+
+    <h2>12. 指定style.width和style.height值是300和100</h2>
+    <p>
+        width:300px;
+        <br>height:100px;</p>
+    <img src="http://a.diaox2.com/cms/sites/default/files/20160923/zk/6401.jpg" style="width:300px;height:100px"></body>
+</html>

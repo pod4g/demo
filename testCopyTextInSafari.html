@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Safari10 终于放开了程序操作剪切板的限制</title>
+</head>
+<body>
+<p id="p">
+    Safari10 终于放开了程序操作剪切板的限制
+</p>
+<button id="btn">直接拷贝上面的文字</button>
+
+<p id="p2">
+   选择这行文本，然后点击”拷贝选择文字“按钮
+</p>
+<button id="btn2">拷贝选择文字</button>
+
+<p id="p3">
+   直接拷贝上面的文字
+</p>
+<button id="btn3">拷贝选择文字</button>
+
+<script>
+var btn = document.getElementById('btn');
+var btn2 = document.getElementById('btn2');
+var btn3 = document.getElementById('btn3');
+function copyTextToClipboard(text, success, error) {
+    success = success || function() {};
+    error = error || function() {};
+    // 如果是IE，就使用IE专有方式进行拷贝
+    // 好处是可以直接复制而不用曲线救国，创建textarea来实现。
+    if (window.clipboardData) {
+      var successful = window.clipboardData.setData('Text', text);
+      if (successful) {
+        success();
+      } else {
+        error();
+      }
+    } else {
+      var textArea = document.createElement('textarea');
+      var styleArr = [
+        'position:', 'fixed;',
+        'top:', '100px;',
+        'left:', '100px;',
+        'padding:', '0;',
+        // 针对safari10
+        // 增大textarea的大小，否则的话在safari10中successful为true，
+        // 但却什么也没拷贝
+        'width:', '131px;',
+        'height:', '121px;',
+        'border:', 'none;',
+        'outline:', 'none;',
+        'boxShadow:', 'none;',
+        'background:', 'transparent;'
+        // 针对safari10
+        // 因为增大了textarea的大小，故使用其他技巧隐藏之
+        // 'opacity:', '0;',
+        // 'z-index:','-1;'
+      ];
+      textArea.style.cssText = styleArr.join('');
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'successful' : 'unsuccessful';
+        console.log('Copying text command was ' + msg);
+        try {
+          if (successful) {
+            success();
+          } else {
+            error();
+          }
+        } catch (e) {
+          console.log('执行success或error有异常！！！！！');
+          console.error(e);
+        }
+      } catch (e) {
+        console.log('Oops, unable to copy');
+        error();
+      }
+      // 卸磨杀驴
+      document.body.removeChild(textArea);
+    }
+  }
+    btn.onclick = function(){
+       copyTextToClipboard(p.innerText);
+    }
+    btn2.onclick = function(){
+       document.execCommand('copy')
+    }
+</script>
+</body>
+</html>

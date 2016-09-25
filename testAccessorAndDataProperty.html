@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>测试数据属性和访问器属性</title>
+</head>
+<body>
+<p>
+从[[prototype]]对象继承来的命名数据属性（作为子对象的属性可见）是为了[[get]]请求，但无法用于[[put]]
+请求。
+命名访问器属性会把[[get]]和[[put]]都继承。
+这段规范的意思是：
+如果是数据属性，那么给对象赋值的话，会赋值到对象本身，而不会赋值到对象的原型链上的同名属性上去
+如果是访问器属性，那么给对象赋值的话，会调用原型链上的set方法。
+</p>
+<script>
+    var object = {};
+    var obj = Object.create(object);
+    Object.defineProperties(object,{
+        name: {
+                value: '李彦峰',
+                writable: true,
+                enumerable: true,
+                configurable: true
+        },
+        age: {
+            get: function(){
+                return this._age;
+            },
+            set: function(age){
+                console.log('[[put]]触发');
+                this._age = age;
+            },
+            enumerable: true,
+            configurable: true
+        }
+    });
+    console.log(obj);
+
+    console.group('测试数据属性');
+    console.log(Object.getOwnPropertyDescriptor(obj,'name'));
+    console.log(Object.getOwnPropertyDescriptor(object,'name'));
+    console.log(obj.name);
+    obj.name = '李燕山';
+    console.log(obj.name);
+    console.log(obj);
+    console.groupEnd('测试数据属性');
+
+    console.group('测试访问器属性');
+    console.log(Object.getOwnPropertyDescriptor(obj,'age'));
+    console.log(Object.getOwnPropertyDescriptor(object,'age'));
+    console.log(obj.age);
+    // 原来obj对象并没有age属性，给obj的age属性赋值的话
+    // 会调用obj对象的原型对象即object的age访问器属性的set方法
+    obj.age = 26;
+    console.log(obj.age);
+    console.log(obj);
+    console.groupEnd('测试访问器属性');
+
+</script>    
+</body>
+</html>
