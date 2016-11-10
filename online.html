@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>判断是否在线</title>
+</head>
+<body>
+<script type="text/javascript">
+    
+    'use strict';
+    ~function(){
+        // var desc = Object.getOwnPropertyDescriptor(Navigator.prototype, 'onLine');
+        // console.log(desc);
+        // Object.defineProperty(Navigator.prototype, 'onLine',{
+        //     configurable: true,
+        //     enumerable: true,
+        //     get: desc.get,
+        //     set: function(){
+        //         alert('set 执行');
+        //     }
+        // })
+        
+        // setInterval(function checkOnLineStatus(){
+        //     if(checkOnLineStatus.onLine !== void 0 && checkOnLineStatus.onLine !== navigator.onLine){
+        //         alert('状态发生了改变')
+        //     }
+        //     checkOnLineStatus.onLine = navigator.onLine;
+        // }, 1000);
+
+
+        document.body.addEventListener("offline", function () {
+         alert("offline")
+        }, false);
+
+        document.body.addEventListener("online", function () {
+         alert("online")
+        }, false);
+
+    }();
+
+</script>    
+</body>
+</html>
+
+<!-- <!doctype html>
+ <html>
+ <head>
+   <script>
+     function updateOnlineStatus(msg) {
+       var status = document.getElementById("status");
+       var condition = navigator.onLine ? "ONLINE" : "OFFLINE";
+       status.setAttribute("class", condition);
+       var state = document.getElementById("state");
+       state.innerHTML = condition;
+       var log = document.getElementById("log");
+       log.appendChild(document.createTextNode("Event: " + msg + "; status=" + condition + "\n"));
+     }
+     function loaded() {
+       updateOnlineStatus("load");
+       document.body.addEventListener("offline", function () {
+         updateOnlineStatus("offline")
+       }, false);
+       document.body.addEventListener("online", function () {
+         updateOnlineStatus("online")
+       }, false);
+     }
+   </script>
+ </head>
+ <body onload="loaded()">
+   <div id="status"><p id="state"></p></div>
+   <div id="log"></div>
+ </body>
+ </html> -->

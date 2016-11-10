@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>测试默认字体大小和行高</title>
+<style type="text/css">
+    #pclick2{
+        font-size: 8px;
+    }
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+</head>
+<body>
+<h2>未设置任何样式：</h2>
+<p id="pclick"></p>
+<h2>设置了font-size:8px;</h2>
+<p id="pclick2"></p>
+<script type="text/javascript">
+    var pclick = document.getElementById('pclick')
+    var pclick2 = document.getElementById('pclick2')
+
+    function getStyle(ele, attr){
+        if(getComputedStyle){
+            return getComputedStyle(ele, null)[attr]
+        }else{
+            return ele.currentStyle[attr]
+        }
+    }
+
+    var defFontSize = getStyle(pclick, 'font-size');
+    var defLineHeight = getStyle(pclick, 'line-height');
+    pclick.innerHTML = 'font-size: ' + defFontSize + ';<br>line-height: ' + defFontSize + ';'
+
+    var defFontSize2 = getStyle(pclick2, 'font-size');
+    var defLineHeight2 = getStyle(pclick2, 'line-height');
+    pclick2.innerHTML = 'font-size: ' + defFontSize2 + ';<br>line-height: ' + defFontSize2 + ';'
+</script>
+</body>
+</html>
